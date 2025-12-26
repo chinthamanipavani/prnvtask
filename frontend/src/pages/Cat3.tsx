@@ -11,7 +11,7 @@ const Cat3: React.FC = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/repair"); // matches backend route
+        const res = await fetch("http://localhost:5000/api/repair"); 
         if (!res.ok) throw new Error("Failed to fetch services");
         const data: Service[] = await res.json();
         setServices(data);
@@ -55,7 +55,7 @@ const Cat3: React.FC = () => {
               onClick={() =>
                 navigate("/booking", {
                   state: {
-                    serviceName: service.name, // 👈 only clicked service
+                    serviceName: service.name, 
                     servicePrice: service.price,
                   },
                 })

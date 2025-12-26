@@ -1,7 +1,12 @@
+
+import * as dotenv from "dotenv";
+dotenv.config();
+
+
 import * as express from "express";
 import * as cors from "cors";
 import connectDB from "./config/db";
-import * as dotenv from "dotenv";
+
 
 import cleaningRoutes from "./routes/cleaningRoutes";
 import beautyRoutes from "./routes/beautyRoutes";
@@ -12,14 +17,15 @@ import technicianRoutes from "./routes/technicianRoutes";
 import sendEmailRoutes from "./routes/email"
 
 
-import Cleaning from "./models/Cleaning"; // ✅ Import Cleaning
+import Cleaning from "./models/Cleaning"; 
 import Beauty from "./models/Beauty";
 import HomeRepair from "./models/Repair"; 
 
 const app = express();
 
 
-dotenv.config();
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
 // Connect to MongoDB
 connectDB().then(async () => {
   console.log("MongoDB connected!");
@@ -39,13 +45,10 @@ connectDB().then(async () => {
   }
 });
 
-// Enable CORS for all origins
 app.use(cors());
 
-// Parse JSON requests
 app.use(express.json());
 
-// Routes
 app.use("/api/cleaning", cleaningRoutes);
 app.use("/api/beauty", beautyRoutes);
 app.use("/api/repair", homeRepairRoutes);
@@ -54,7 +57,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/technicians", technicianRoutes);
 app.use("/api/send-email", sendEmailRoutes);
 
-// Start server
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

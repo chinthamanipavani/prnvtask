@@ -15,26 +15,22 @@ const Login: React.FC = () => {
         password,
       });
 
-      // ✅ get user safely
       const user = res.data.user || res.data;
 
-      // ✅ store required data
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("role", user.role);
       localStorage.setItem("userId", user._id);
 
       if (user.role === "technician") {
+        localStorage.setItem("technicianId", user._id);
         localStorage.setItem(
           "technicianTimeSlots",
           JSON.stringify(user.timeSlots || [])
         );
-        console.log("Technician TimeSlots:", user.timeSlots);
       }
-
       console.log("Role:", user.role);
       alert("Login successful");
 
-      // ✅ ROLE BASED NAVIGATION
       if (user.role === "customer") {
         navigate("/category");
       } else if (user.role === "technician") {

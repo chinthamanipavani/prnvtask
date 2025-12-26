@@ -14,5 +14,4 @@ const homeRepairSchema: Schema = new Schema({
   price: { type: String }
 });
 
-// Map explicitly to "repair" collection
 export default mongoose.model<IHomeRepair>("HomeRepair", homeRepairSchema, "repair");

@@ -14,5 +14,4 @@ const cleaningSchema: Schema = new Schema({
   price:{type: String},
 });
 
-// Map explicitly to the "home" collection
 export default mongoose.model<ICleaning>("Cleaning", cleaningSchema, "home");

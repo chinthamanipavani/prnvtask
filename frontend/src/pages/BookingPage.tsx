@@ -68,7 +68,6 @@ const BookingPage: React.FC = () => {
 
       if (!res.ok) throw new Error("Booking failed");
 
-      // ✅ SAVE DATA FOR SUCCESS PAGE
       localStorage.setItem(
         "bookingData",
         JSON.stringify({
@@ -82,19 +81,12 @@ const BookingPage: React.FC = () => {
         })
       );
 
-      // ✅ NAVIGATE AFTER SAVE
       navigate("/booking-success");
     } catch (error) {
       console.error(error);
       alert("Booking failed. Try again.");
     }
   };
-
-
-
-
-
-
 
 
 

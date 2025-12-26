@@ -1,5 +1,5 @@
 import { Router } from "express";
-import nodemailer from "nodemailer";
+import * as nodemailer from "nodemailer";
 
 const router = Router();
 
@@ -11,14 +11,15 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    // ✅ Create transporter using env variables
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER, // from .env
-        pass: process.env.EMAIL_PASS, // from .env
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
       },
     });
+
+    await transporter.verify();
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -29,9 +30,11 @@ router.post("/", async (req, res) => {
 
     res.json({ message: "Email sent successfully" });
   } catch (error: any) {
-    console.error(error);
+    console.error("EMAIL ERROR:", error);
     res.status(500).json({ message: "Email sending failed", error: error.message });
   }
 });
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS);
 
 export default router;

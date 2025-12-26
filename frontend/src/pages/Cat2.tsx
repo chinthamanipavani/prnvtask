@@ -53,13 +53,12 @@ const Cat2: React.FC = () => {
               <span>price : </span>{service.price}
             </h2>
 
-            {/* ✅ IMPORTANT PART */}
             <button
               className="bg-blue-600 text-white px-4 py-2 rounded-lg"
               onClick={() =>
                 navigate("/booking", {
                   state: {
-                    serviceName: service.name, // 👈 only clicked service
+                    serviceName: service.name, 
                     servicePrice: service.price,
                   },
                 })

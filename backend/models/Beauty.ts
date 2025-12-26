@@ -14,5 +14,4 @@ const beautySchema: Schema = new Schema({
   price:{type:String},
 });
 
-// Specify the exact collection name in MongoDB
 export default mongoose.model<IBeauty>("Beauty", beautySchema, "beauty");

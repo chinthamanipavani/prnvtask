@@ -4,7 +4,6 @@ import Booking from "../models/Booking";
 
 const router = express.Router();
 
-// ✅ GET ALL TECHNICIANS (Customer page)
 router.get("/", async (req, res) => {
   try {
     const technicians = await User.find(
@@ -17,7 +16,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ TECHNICIAN DASHBOARD
 router.get("/:techId/dashboard", async (req, res) => {
   try {
     const technician = await User.findById(req.params.techId);
@@ -38,7 +36,6 @@ router.get("/:techId/dashboard", async (req, res) => {
 
 // ADD THIS API BELOW EXISTING ROUTES
 
-// ✅ GET AVAILABLE TECHNICIANS BY SLOT
 router.get("/available", async (req, res) => {
   try {
     const { slot } = req.query;

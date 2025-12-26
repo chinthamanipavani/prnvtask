@@ -37,12 +37,9 @@ const Register: React.FC = () => {
         form
       );
 
-      // ✅ backend nunchi vachina data
       const user = res.data.user || res.data;
 
-      // ✅ localStorage lo save
       localStorage.setItem("role", user.role);
-      // localStorage.setItem("userId", user._id);
 
       alert("Registered successfully");
       navigate("/login");

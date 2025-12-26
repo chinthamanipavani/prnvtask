@@ -27,6 +27,17 @@ router.get("/technician/:techId", async (req, res) => {
   }
 });
 
+
+// get all 
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const bookings = await Booking.find(); 
+    res.json(bookings);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // delete
 
 
@@ -38,7 +49,6 @@ router.delete("/cancel", async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Missing booking details" });
     }
 
-    // Use nested query for userDetails.email
     const deletedBooking = await Booking.findOneAndDelete({
       serviceName,
       date,
