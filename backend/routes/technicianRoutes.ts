@@ -36,4 +36,33 @@ router.get("/:techId/dashboard", async (req, res) => {
   }
 });
 
+// ADD THIS API BELOW EXISTING ROUTES
+
+// ✅ GET AVAILABLE TECHNICIANS BY SLOT
+router.get("/available", async (req, res) => {
+  try {
+    const { slot } = req.query;
+
+    if (!slot) {
+      return res.status(400).json({ message: "Slot is required" });
+    }
+
+    // find booked technicians for that slot
+    const bookedTechIds = await Booking.find({ slot })
+      .distinct("technicianId");
+
+    // available technicians
+    const technicians = await User.find({
+      role: "technician",
+      timeSlots: slot,
+      _id: { $nin: bookedTechIds },
+    }).select("-password");
+
+    res.json(technicians);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 export default router;

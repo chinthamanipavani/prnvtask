@@ -9,36 +9,43 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-  try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
-      email,
-      password,
-    });
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
 
-    // ✅ get user safely
-    const user = res.data.user || res.data;
+      // ✅ get user safely
+      const user = res.data.user || res.data;
 
-    // ✅ store required data
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("role", user.role);
-    localStorage.setItem("userId", user._id);
+      // ✅ store required data
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("role", user.role);
+      localStorage.setItem("userId", user._id);
 
-    console.log("Role:", user.role);
-    alert("Login successful");
+      if (user.role === "technician") {
+        localStorage.setItem(
+          "technicianTimeSlots",
+          JSON.stringify(user.timeSlots || [])
+        );
+        console.log("Technician TimeSlots:", user.timeSlots);
+      }
 
-    // ✅ ROLE BASED NAVIGATION
-    if (user.role === "customer") {
-      navigate("/category");
-    } else if (user.role === "technician") {
-      navigate("/technicians");
-    } else {
-      navigate("/");
+      console.log("Role:", user.role);
+      alert("Login successful");
+
+      // ✅ ROLE BASED NAVIGATION
+      if (user.role === "customer") {
+        navigate("/category");
+      } else if (user.role === "technician") {
+        navigate("/technicians");
+      } else {
+        navigate("/");
+      }
+    } catch (error: any) {
+      alert(error.response?.data?.message || "Login failed");
     }
-  } catch (error: any) {
-    alert(error.response?.data?.message || "Login failed");
-  }
-};
-
+  };
 
   return (
     <div className="max-w-md mx-auto p-6">
