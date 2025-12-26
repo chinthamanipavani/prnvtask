@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as cors from "cors";
 import connectDB from "./config/db";
+import * as dotenv from "dotenv";
 
 import cleaningRoutes from "./routes/cleaningRoutes";
 import beautyRoutes from "./routes/beautyRoutes";
@@ -8,6 +9,7 @@ import homeRepairRoutes from "./routes/repairRoutes";
 import bookingRoutes from "./routes/bookingRoutes"
 import authRoutes from "./routes/auth";
 import technicianRoutes from "./routes/technicianRoutes";
+import sendEmailRoutes from "./routes/email"
 
 
 import Cleaning from "./models/Cleaning"; // ✅ Import Cleaning
@@ -16,6 +18,8 @@ import HomeRepair from "./models/Repair";
 
 const app = express();
 
+
+dotenv.config();
 // Connect to MongoDB
 connectDB().then(async () => {
   console.log("MongoDB connected!");
@@ -48,6 +52,7 @@ app.use("/api/repair", homeRepairRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/technicians", technicianRoutes);
+app.use("/api/send-email", sendEmailRoutes);
 
 // Start server
 const PORT = 5000;
