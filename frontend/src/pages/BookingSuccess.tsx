@@ -1,4 +1,7 @@
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 interface BookingData {
   serviceName: string;
@@ -11,6 +14,7 @@ interface BookingData {
 }
 
 const BookingSuccess: React.FC = () => {
+  const navigate=useNavigate()
   const storedData = localStorage.getItem("bookingData");
 
   let booking: BookingData | null = null;
@@ -28,6 +32,37 @@ const BookingSuccess: React.FC = () => {
       </p>
     );
   }
+
+
+
+
+const handleCancel = async () => {
+  if (!booking) return;
+
+  const confirmCancel = window.confirm(
+    "Are you sure you want to cancel your booking?"
+  );
+  if (!confirmCancel) return;
+
+  try {
+    await axios.delete(`http://localhost:5000/api/bookings/cancel`, {
+      data: {
+        serviceName: booking.serviceName,
+        date: booking.date,
+        slot: booking.slot,
+        userEmail: booking.userEmail,
+      },
+    });
+
+    alert("Booking cancelled successfully.");
+    localStorage.removeItem("bookingData");
+ navigate("/category")
+  } catch (error: any) {
+    alert("Failed to cancel booking: " + error.message);
+  }
+};
+
+
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow">
@@ -57,6 +92,14 @@ const BookingSuccess: React.FC = () => {
           <strong>Address:</strong> {booking.userAddress}
         </p>
       </div>
+   
+    {/* Cancel Button */}
+      <button
+        onClick={handleCancel}
+        className="w-full mt-6 bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600 transition"
+      >
+        Cancel Booking
+      </button>
     </div>
   );
 };

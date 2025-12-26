@@ -90,6 +90,16 @@ const BookingPage: React.FC = () => {
     }
   };
 
+
+
+
+
+
+
+
+
+  
+
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow">
       <h1 className="text-2xl font-bold mb-6 text-center">
