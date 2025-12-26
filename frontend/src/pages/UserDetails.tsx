@@ -9,7 +9,7 @@ const UserDetails = () => {
     name: "",
     phone: "",
     email: "",
-    address: ""
+    address: "",
   });
 
   const confirmBooking = async () => {
@@ -18,8 +18,8 @@ const UserDetails = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...state,
-        userDetails: form
-      })
+        userDetails: form,
+      }),
     });
 
     navigate("/booking-success");
@@ -34,9 +34,7 @@ const UserDetails = () => {
           key={field}
           placeholder={field}
           className="border p-2 w-full mb-3"
-          onChange={(e) =>
-            setForm({ ...form, [field]: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, [field]: e.target.value })}
         />
       ))}
 

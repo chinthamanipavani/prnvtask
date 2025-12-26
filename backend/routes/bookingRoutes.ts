@@ -27,4 +27,17 @@ router.get("/technician/:techId", async (req, res) => {
   }
 });
 
+// DELETE BOOKING (Cancel)
+router.delete("/:bookingId", async (req: Request, res: Response) => {
+  try {
+    const deletedBooking = await Booking.findByIdAndDelete(req.params.bookingId);
+    if (!deletedBooking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+    res.json({ message: "Booking cancelled successfully" });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;

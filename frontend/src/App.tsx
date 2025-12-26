@@ -6,22 +6,33 @@ import Cat3 from "./pages/Cat3";
 import BookingPage from "./pages/BookingPage";
 import UserDetails from "./pages/UserDetails";
 import BookingSuccess from "./pages/BookingSuccess";
+import Register from "./component/Register";
+import Login from "./component/Login";
+import Technician from "./pages/Technician";
+import CustomerRoute from "./pages/CustomerRoute";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* First page */}
-        <Route path="/" element={<CategoryPage />} />
+        <Route path="/category" element={<CategoryPage />} />
         <Route path="/cat1" element={<Cat1 />} />
         <Route path="/cat2" element={<Cat2 />} />
         <Route path="/cat3" element={<Cat3 />} />
 
         {/* <Route path="/booking/:category/:serviceId" element={<BookingPage />} /> */}
-               <Route path="/booking" element={<BookingPage />} />
-
+        <Route path="/booking" element={<BookingPage />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/booking-success" element={<BookingSuccess />} />
+        {/* login */}
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        {/* technician */}
+        <Route element={<CustomerRoute allowedRole="technician" />}>
+          <Route path="/technicians" element={<Technician />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

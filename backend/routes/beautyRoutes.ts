@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Beauty from "../models/Beauty";
 import * as express from "express";
+import Beauty from "../models/Beauty";
 
 const router = express.Router();
 

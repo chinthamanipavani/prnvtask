@@ -6,6 +6,9 @@ import cleaningRoutes from "./routes/cleaningRoutes";
 import beautyRoutes from "./routes/beautyRoutes";
 import homeRepairRoutes from "./routes/repairRoutes";
 import bookingRoutes from "./routes/bookingRoutes"
+import authRoutes from "./routes/auth";
+import technicianRoutes from "./routes/technicianRoutes";
+
 
 import Cleaning from "./models/Cleaning"; // ✅ Import Cleaning
 import Beauty from "./models/Beauty";
@@ -43,6 +46,8 @@ app.use("/api/cleaning", cleaningRoutes);
 app.use("/api/beauty", beautyRoutes);
 app.use("/api/repair", homeRepairRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/technicians", technicianRoutes);
 
 // Start server
 const PORT = 5000;
