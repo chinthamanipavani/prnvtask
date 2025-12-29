@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import All from "./All";
 
 interface Technician {
   _id: string;
@@ -85,6 +86,9 @@ Booking App
   return (
     <div className="max-w-4xl mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-4">Matched Booking Details</h1>
+      <div className="fixed top-13 right-10 ">
+        <All />
+      </div>
 
       {!bookingData && <p className="text-red-500">No booking data found</p>}
 

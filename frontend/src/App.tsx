@@ -10,12 +10,14 @@ import Register from "./component/Register";
 import Login from "./component/Login";
 import Technician from "./pages/Technician";
 import CustomerRoute from "./pages/CustomerRoute";
-
+import All from "./pages/All";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/1" element={<All />} />
+
         {/* First page */}
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/cat1" element={<Cat1 />} />

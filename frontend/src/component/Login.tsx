@@ -15,11 +15,18 @@ const Login: React.FC = () => {
         password,
       });
 
-      const user = res.data.user || res.data;
+      const rawUser = res.data.user || res.data;
+
+      const user = {
+        _id: rawUser._id || rawUser.id, // ⭐ FIX IS HERE
+        email: rawUser.email,
+        role: rawUser.role,
+        timeSlots: rawUser.timeSlots || [],
+      };
 
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("role", user.role);
-      localStorage.setItem("userId", user._id);
+     localStorage.setItem("userId", user._id);
 
       if (user.role === "technician") {
         localStorage.setItem("technicianId", user._id);

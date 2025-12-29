@@ -19,9 +19,7 @@ router.post("/register", async (req, res) => {
         .status(400)
         .json({ message: "Technician must select time slots" });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const user = new User({
       name,
       email,
@@ -67,5 +65,45 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
+/* ================= GET ALL USERS ================= */
+router.get("/users", async (req, res) => {
+  try {
+    const users = await User.find().select("-password"); 
+
+    res.status(200).json(users);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// PUT /api/auth/users/:id/role
+router.put("/users/:id/role", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { role } = req.body;
+
+    if (!role) {
+      return res.status(400).json({ message: "Role is required" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { role },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "Role updated successfully", user: updatedUser });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 export default router;

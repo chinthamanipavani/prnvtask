@@ -49,6 +49,7 @@ app.use(cors());
 
 app.use(express.json());
 
+
 app.use("/api/cleaning", cleaningRoutes);
 app.use("/api/beauty", beautyRoutes);
 app.use("/api/repair", homeRepairRoutes);
