@@ -4,21 +4,21 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import connectDB from "./config/db";
+import connectDB from "../dist/config";
 
 
-import cleaningRoutes from "./routes/cleaningRoutes";
-import beautyRoutes from "./routes/beautyRoutes";
-import homeRepairRoutes from "./routes/repairRoutes";
-import bookingRoutes from "./routes/bookingRoutes"
-import authRoutes from "./routes/auth";
-import technicianRoutes from "./routes/technicianRoutes";
-import sendEmailRoutes from "./routes/email"
+import cleaningRoutes from "../dist/routes/cleaningRoutes";
+import beautyRoutes from "../dist/routes/beautyRoutes";
+import homeRepairRoutes from "../dist/routes/repairRoutes";
+import bookingRoutes from "../dist/routes/bookingRoutes"
+import authRoutes from "../dist/routes/auth";
+import technicianRoutes from "../dist/routes/technicianRoutes";
+import sendEmailRoutes from "../dist/routes/email"
 
 
-import Cleaning from "./models/Cleaning"; 
-import Beauty from "./models/Beauty";
-import HomeRepair from "./models/Repair"; 
+import Cleaning from "../dist/models/Cleaning"; 
+import Beauty from "../dist/models/Beauty";
+import HomeRepair from "../dist/models/Repair"; 
 
 const app = express();
 

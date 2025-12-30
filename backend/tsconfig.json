@@ -8,6 +8,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["server.ts", "routes", "models", "config"],
+  "include": ["dist/server.ts", "routes", "models", "config"],
   "exclude": ["node_modules"]
 }
